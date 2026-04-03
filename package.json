@@ -1,0 +1,57 @@
+{
+  "name": "kriti-desktop",
+  "version": "1.0.0",
+  "description": "A cross-platform desktop app that lets you select text anywhere on your computer to instantly get word meanings, translations in 12 languages, and save to organised notes. Built with Electron.",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "seed-wordlist": "node scripts/seed-wordlist.js",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.kriti.desktop",
+    "productName": "Kriti",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**",
+      "preload.js",
+      "overlay-preload.js",
+      "assets/**"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sentryubeastz/kriti-desktop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sentryubeastz/kriti-desktop/issues"
+  },
+  "homepage": "https://github.com/sentryubeastz/kriti-desktop#readme",
+  "devDependencies": {
+    "electron": "^41.1.1",
+    "electron-builder": "^26.8.1"
+  },
+  "dependencies": {
+    "electron-store": "^11.0.2"
+  }
+}

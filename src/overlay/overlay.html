@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; }
+  html, body {
+    width: 100vw; height: 100vh;
+    background: transparent;
+    overflow: hidden;
+    cursor: default;
+  }
+</style>
+</head>
+<body>
+<script>
+  // Any click anywhere on this invisible overlay = close the popup
+  document.addEventListener('mousedown', () => {
+    window.overlayAPI?.dismiss();
+  });
+</script>
+</body>
+</html>
