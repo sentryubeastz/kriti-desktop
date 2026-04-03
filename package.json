@@ -24,7 +24,7 @@
       "assets/**"
     ],
     "win": {
-      "target": "nsis"
+      "target": "portable"
     },
     "mac": {
       "target": "dmg",
