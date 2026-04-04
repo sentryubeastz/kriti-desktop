@@ -4,6 +4,7 @@ const { BrowserWindow } = require('electron');
 const path = require('path');
 
 const PRELOAD_PATH = path.join(__dirname, '..', '..', 'preload.js');
+const ICON_PATH = path.join(__dirname, '..', '..', 'assets', process.platform === 'win32' ? 'kriti.ico' : 'kriti.png');
 
 // ─── Popup window (frameless, always-on-top) ────────────────────────────────
 function createPopupWindow() {
@@ -21,6 +22,7 @@ function createPopupWindow() {
     // The default alwaysOnTop level can suppress blur events in some builds.
     skipTaskbar: true,
     show: false,
+    icon: ICON_PATH,
     webPreferences: {
       preload: PRELOAD_PATH,
       contextIsolation: true,
@@ -42,6 +44,7 @@ function createNotesWindow() {
     minWidth: 430,
     minHeight: 500,
     title: 'Kriti – Notes',
+    icon: ICON_PATH,
     resizable: true,
     webPreferences: {
       preload: PRELOAD_PATH,
@@ -61,6 +64,7 @@ function createSettingsWindow() {
     height: 560,
     resizable: false,
     title: 'Kriti – Settings',
+    icon: ICON_PATH,
     webPreferences: {
       preload: PRELOAD_PATH,
       contextIsolation: true,

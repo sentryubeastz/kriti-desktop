@@ -63,8 +63,12 @@ function createTray({ onOpenNotes, onOpenSettings }) {
   let icon;
 
   try {
-    const iconPath = path.join(__dirname, '..', '..', 'assets', 'tray-icon.png');
-    icon = nativeImage.createFromPath(iconPath);
+    const primaryIconPath = path.join(__dirname, '..', '..', 'assets', 'kriti.png');
+    icon = nativeImage.createFromPath(primaryIconPath);
+    if (icon.isEmpty()) {
+      const fallbackIconPath = path.join(__dirname, '..', '..', 'assets', 'tray-icon.png');
+      icon = nativeImage.createFromPath(fallbackIconPath);
+    }
     if (icon.isEmpty()) throw new Error('empty icon file');
   } catch {
     // Generate a 16x16 purple (#667eea) square as fallback
