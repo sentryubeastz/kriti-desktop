@@ -25,7 +25,8 @@
     ],
     "win": {
       "target": "portable",
-      "signAndEditExecutable": false
+      "signAndEditExecutable": false,
+      "icon": "assets/kriti.ico"
     },
     "mac": {
       "target": "dmg",
@@ -33,7 +34,7 @@
     },
     "linux": {
       "target": "AppImage",
-      "icon": "assets/icon.png"
+      "icon": "assets/kriti.png"
     }
   },
   "repository": {
