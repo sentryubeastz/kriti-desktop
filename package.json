@@ -24,7 +24,8 @@
       "assets/**"
     ],
     "win": {
-      "target": "portable"
+      "target": "portable",
+      "signAndEditExecutable": false
     },
     "mac": {
       "target": "dmg",
