@@ -764,6 +764,30 @@
       color: #26305a;
     }
 
+    .note-speak-btn {
+      border: 0;
+      background: transparent;
+      color: #646f95;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .note-speak-btn:hover {
+      background: #edf0fb;
+      color: #26305a;
+    }
+
+    .note-speak-btn.speaking {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
     .menu {
       position: absolute;
       right: 0;
@@ -1130,6 +1154,9 @@
       .move-list { border-top-color: #2e3050; }
       .menu-btn { color: #8b93b8; }
       .menu-btn:hover { background: #252640; color: #c5c9df; }
+      .note-speak-btn { color: #8b93b8; }
+      .note-speak-btn:hover { background: #252640; color: #c5c9df; }
+      .note-speak-btn.speaking { background: #231d3a; color: #a990f5; }
 
       /* Search bar */
       .search-wrap { background: #13141f; }

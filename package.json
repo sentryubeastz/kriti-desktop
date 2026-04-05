@@ -14,6 +14,7 @@
   "build": {
     "appId": "com.kriti.desktop",
     "productName": "Kriti",
+    "electronLanguages": ["en-US"],
     "directories": {
       "output": "dist"
     },
@@ -26,7 +27,8 @@
     "win": {
       "target": "portable",
       "signAndEditExecutable": false,
-      "icon": "assets/kriti.ico"
+      "icon": "assets/kriti.ico",
+      "compression": "maximum"
     },
     "mac": {
       "target": "dmg",
