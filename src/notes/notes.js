@@ -1,5 +1,8 @@
 // Kriti popup: notes, stats, pins, export, and custom folder management.
 
+const SPEAK_SVG = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
+const STOP_SVG  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+
 let notesState = {};
 let historyState = [];
 let pinnedFoldersState = [];
@@ -572,6 +575,23 @@ function createWordCard(pageTitle, note, query = '') {
     topActions.appendChild(typeBadge);
   }
 
+  const speakParts = [note.word || ''];
+  const cleanDefForSpeak = (note.definition || '').replace(/^Definition:\s*/i, '').trim();
+  if (cleanDefForSpeak) speakParts.push(cleanDefForSpeak);
+  if (note.translation) speakParts.push(note.translation);
+  const speakAllText = speakParts.join('. ');
+
+  const speakBtn = document.createElement('button');
+  speakBtn.type = 'button';
+  speakBtn.className = 'note-speak-btn';
+  speakBtn.title = 'Read aloud';
+  speakBtn.innerHTML = SPEAK_SVG;
+  speakBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    toggleSpeak(speakBtn, speakAllText);
+  });
+
+  topActions.appendChild(speakBtn);
   topActions.appendChild(menuWrap);
   top.appendChild(topActions);
 
@@ -1814,6 +1834,29 @@ function toCsvCell(value) {
     return `"${escaped}"`;
   }
   return escaped;
+}
+
+// ─── TTS ──────────────────────────────────────────────────────────────────────
+function toggleSpeak(btn, text) {
+  const isSpeaking = btn.classList.contains('speaking');
+  window.speechSynthesis?.cancel();
+  document.querySelectorAll('.note-speak-btn.speaking').forEach((b) => {
+    b.innerHTML = SPEAK_SVG;
+    b.classList.remove('speaking');
+  });
+
+  if (isSpeaking) return;
+  if (!text || !('speechSynthesis' in window)) return;
+
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.onend = utt.onerror = () => {
+    btn.innerHTML = SPEAK_SVG;
+    btn.classList.remove('speaking');
+  };
+
+  btn.innerHTML = STOP_SVG;
+  btn.classList.add('speaking');
+  window.speechSynthesis.speak(utt);
 }
 
 function showToast(message) {
