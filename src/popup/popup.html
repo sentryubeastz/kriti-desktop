@@ -419,104 +419,105 @@
 </head>
 <body>
 
-  <div id="popupOverlay" style="position:fixed;z-index:1;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.01);display:block;"></div>
-
-  <!-- Drag bar (moves the window) -->
-  <div id="dragBar" style="position:relative;z-index:2">
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="app-name">Kriti</span>
-      <span id="offlineBadge" style="display:none;align-items:center;gap:3px;font-size:10px;font-weight:600;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:1px 7px;border-radius:20px;letter-spacing:0.2px">&#9679; Offline</span>
-    </div>
-    <div class="header-right">
-      <button class="btn-notes-link" id="btnNotes" type="button">My Notes</button>
-      <button class="btn-close" id="btnClose" type="button" title="Close (Esc)">&#x2715;</button>
-    </div>
-  </div>
-
-  <!-- Search mode: shown when shortcut fired but no text was auto-copied -->
-  <div id="searchMode">
-    <div class="search-hint">
-      <strong>Type to look up</strong>
-      No text was auto-copied. Type a word below.
-    </div>
-    <div class="search-box-wrap">
-      <input id="manualInput" type="text" placeholder="Enter a word or phrase…" autocomplete="off" spellcheck="false">
-      <button id="manualSearchBtn" type="button">Go</button>
-    </div>
-  </div>
-
-  <!-- Main content -->
-  <div id="content">
-    <!-- Word -->
-    <div class="word-section" id="wordSection">
-      <span class="mode-badge" id="modeBadge">Word</span>
-      <span class="word-text" id="wordText">—</span>
-      <button class="action-btn" id="btnSpeakWord" title="Read aloud">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-        </svg>
-      </button>
-      <button class="action-btn" id="btnCopy" title="Copy details">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-        </svg>
-      </button>
+  <div id="popupOverlay" style="position:fixed;z-index:1;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.01);"></div>
+  <div id="popupContainer" style="position:relative;z-index:2;pointer-events:auto;">
+    <!-- Drag bar (moves the window) -->
+    <div id="dragBar" style="position:relative;z-index:2">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="app-name">Kriti</span>
+        <span id="offlineBadge" style="display:none;align-items:center;gap:3px;font-size:10px;font-weight:600;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:1px 7px;border-radius:20px;letter-spacing:0.2px">&#9679; Offline</span>
+      </div>
+      <div class="header-right">
+        <button class="btn-notes-link" id="btnNotes" type="button">My Notes</button>
+        <button class="btn-close" id="btnClose" type="button" title="Close (Esc)">&#x2715;</button>
+      </div>
     </div>
 
-    <!-- Definition -->
-    <div class="card" id="defCard">
-      <div class="card-label">
-        <span>Definition</span>
-        <button class="action-btn" id="btnSpeakDef" title="Read definition aloud" style="width:20px;height:20px">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Search mode: shown when shortcut fired but no text was auto-copied -->
+    <div id="searchMode">
+      <div class="search-hint">
+        <strong>Type to look up</strong>
+        No text was auto-copied. Type a word below.
+      </div>
+      <div class="search-box-wrap">
+        <input id="manualInput" type="text" placeholder="Enter a word or phrase…" autocomplete="off" spellcheck="false">
+        <button id="manualSearchBtn" type="button">Go</button>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div id="content">
+      <!-- Word -->
+      <div class="word-section" id="wordSection">
+        <span class="mode-badge" id="modeBadge">Word</span>
+        <span class="word-text" id="wordText">—</span>
+        <button class="action-btn" id="btnSpeakWord" title="Read aloud">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
           </svg>
         </button>
-      </div>
-      <div class="card-body" id="defBody"><span class="loading-text">Loading…</span></div>
-    </div>
-
-    <!-- Translation -->
-    <div class="card translation-card" id="transCard" style="display:none">
-      <div class="card-label">
-        <span id="transLabel">Translation</span>
-        <button class="action-btn" id="btnSpeakTrans" title="Read translation aloud" style="width:20px;height:20px">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <button class="action-btn" id="btnCopy" title="Copy details">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
           </svg>
         </button>
       </div>
-      <div class="card-body" id="transBody">—</div>
-    </div>
 
-    <!-- Language row -->
-    <div class="lang-row">
-      <span class="lang-label">Translate to:</span>
-      <select id="langSelect" class="lang-select">
-        <option value="hi">Hindi</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="ar">Arabic</option>
-        <option value="zh">Chinese</option>
-        <option value="ja">Japanese</option>
-        <option value="ta">Tamil</option>
-        <option value="te">Telugu</option>
-        <option value="kn">Kannada</option>
-        <option value="bn">Bengali</option>
-        <option value="pt">Portuguese</option>
-      </select>
-    </div>
+      <!-- Definition -->
+      <div class="card" id="defCard">
+        <div class="card-label">
+          <span>Definition</span>
+          <button class="action-btn" id="btnSpeakDef" title="Read definition aloud" style="width:20px;height:20px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </button>
+        </div>
+        <div class="card-body" id="defBody"><span class="loading-text">Loading…</span></div>
+      </div>
 
-    <!-- Save / Search -->
-    <div id="saveArea"></div>
+      <!-- Translation -->
+      <div class="card translation-card" id="transCard" style="display:none">
+        <div class="card-label">
+          <span id="transLabel">Translation</span>
+          <button class="action-btn" id="btnSpeakTrans" title="Read translation aloud" style="width:20px;height:20px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </button>
+        </div>
+        <div class="card-body" id="transBody">—</div>
+      </div>
+
+      <!-- Language row -->
+      <div class="lang-row">
+        <span class="lang-label">Translate to:</span>
+        <select id="langSelect" class="lang-select">
+          <option value="hi">Hindi</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="ar">Arabic</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ta">Tamil</option>
+          <option value="te">Telugu</option>
+          <option value="kn">Kannada</option>
+          <option value="bn">Bengali</option>
+          <option value="pt">Portuguese</option>
+        </select>
+      </div>
+
+      <!-- Save / Search -->
+      <div id="saveArea"></div>
+    </div>
   </div>
 
   <div class="toast" id="toast"></div>
@@ -525,12 +526,10 @@
     // Overlay click closes popup if not clicking inside popup content
     const overlay = document.getElementById('popupOverlay');
     overlay.addEventListener('mousedown', (e) => {
-      // Only close if not clicking on popup content
       if (e.target === overlay) window.electronAPI?.closePopup();
     });
     // Prevent overlay from blocking pointer events inside popup
-    document.getElementById('dragBar').addEventListener('mousedown', (e) => e.stopPropagation());
-    document.getElementById('content').addEventListener('mousedown', (e) => e.stopPropagation());
+    document.getElementById('popupContainer').addEventListener('mousedown', (e) => e.stopPropagation());
   </script>
   <script src="popup.js"></script>
 </body>
