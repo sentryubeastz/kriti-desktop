@@ -419,8 +419,10 @@
 </head>
 <body>
 
+  <div id="popupOverlay" style="position:fixed;z-index:1;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.01);display:block;"></div>
+
   <!-- Drag bar (moves the window) -->
-  <div id="dragBar">
+  <div id="dragBar" style="position:relative;z-index:2">
     <div style="display:flex;align-items:center;gap:8px">
       <span class="app-name">Kriti</span>
       <span id="offlineBadge" style="display:none;align-items:center;gap:3px;font-size:10px;font-weight:600;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:1px 7px;border-radius:20px;letter-spacing:0.2px">&#9679; Offline</span>
@@ -519,6 +521,17 @@
 
   <div class="toast" id="toast"></div>
 
+  <script>
+    // Overlay click closes popup if not clicking inside popup content
+    const overlay = document.getElementById('popupOverlay');
+    overlay.addEventListener('mousedown', (e) => {
+      // Only close if not clicking on popup content
+      if (e.target === overlay) window.electronAPI?.closePopup();
+    });
+    // Prevent overlay from blocking pointer events inside popup
+    document.getElementById('dragBar').addEventListener('mousedown', (e) => e.stopPropagation());
+    document.getElementById('content').addEventListener('mousedown', (e) => e.stopPropagation());
+  </script>
   <script src="popup.js"></script>
 </body>
 </html>
