@@ -1,6 +1,6 @@
 {
   "name": "kriti-desktop",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A cross-platform desktop app that lets you select text anywhere on your computer to instantly get word meanings, translations in 12 languages, and save to organised notes. Built with Electron.",
   "main": "src/main/main.js",
   "scripts": {
